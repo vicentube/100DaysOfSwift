@@ -21,6 +21,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(showScore))
+        
         countries += ["Estonia", "France", "Germany", "Ireland", "Italy", "Monaco", "Nigeria", "Poland", "Russia", "Spain", "UK", "US"]
         
         button1.layer.borderWidth = 1
@@ -41,7 +43,7 @@ class ViewController: UIViewController {
         button3.setImage(UIImage(named: countries[2]), for: .normal)
         
         correctAnswer = Int.random(in: 0...2)
-        title = countries[correctAnswer] + " - Score: \(score)"
+        title = countries[correctAnswer]
         
         questionNumber += 1
     }
@@ -73,6 +75,12 @@ class ViewController: UIViewController {
             present(alertEnd, animated: true)
         }
         
+    }
+    
+    @objc func showScore() {
+        let alertScore = UIAlertController(title: "Score", message: "Your current score is \(score)", preferredStyle: .alert)
+        alertScore.addAction(UIAlertAction(title: "Continue", style: .default, handler: nil))
+        present(alertScore, animated: true)
     }
 }
 
